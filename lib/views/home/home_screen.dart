@@ -10,47 +10,37 @@ class HomeScreen extends StatelessWidget {
     final spotifyAuth = Provider.of<SpotifyAuthProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Spotify Integration')),
+      appBar: AppBar(title: const Text("Home")),
       body: Center(
-        child: spotifyAuth.isLoading
-            ? const CircularProgressIndicator()
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (spotifyAuth.errorMessage.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        spotifyAuth.errorMessage,
-                        style: const TextStyle(color: Colors.red),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  Text(
-                    'Status: ${spotifyAuth.loginStatus}',
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 10),
-                  if (spotifyAuth.username.isNotEmpty)
-                    Text(
-                      'Username: ${spotifyAuth.username}',
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                  const SizedBox(height: 20),
-                  if (spotifyAuth.accessToken.isEmpty)
-                    ElevatedButton(
-                      onPressed: () =>
-                          spotifyAuth.loginWithSpotify(context),
-                      child: const Text('Login with Spotify'),
-                    ),
-                  if (spotifyAuth.accessToken.isNotEmpty)
-                    Text(
-                      'Access Token:\n${spotifyAuth.accessToken}',
-                      textAlign: TextAlign.center,
-                    ),
-                ],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Status: ${spotifyAuth.loginStatus}",
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            if (spotifyAuth.username.isNotEmpty)
+              Text(
+                "Username: ${spotifyAuth.username}",
+                style: const TextStyle(fontSize: 16),
               ),
+            const SizedBox(height: 20),
+            if (spotifyAuth.accessToken.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  "Access Token:\n${spotifyAuth.accessToken}",
+                  textAlign: TextAlign.center,
+                ),
+              )
+            else
+              const Text(
+                "No access token found. Please login first.",
+                style: TextStyle(color: Colors.red),
+              ),
+          ],
+        ),
       ),
     );
   }
