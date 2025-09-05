@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:sopotify/providers/auth_provider.dart';
 import 'package:sopotify/providers/bottom_navbar_provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:sopotify/providers/playlist_provider.dart';
+import 'package:sopotify/providers/user_provider.dart';
 import 'package:sopotify/views/login/login_screen.dart';
 import 'package:sopotify/widgets/bottom_navbar.dart';
 
@@ -15,6 +17,8 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => SpotifyAuthProvider()),
         ChangeNotifierProvider(create: (_) => NavProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => PlaylistProvider())
       ],
       child: const MyApp(),
     ),

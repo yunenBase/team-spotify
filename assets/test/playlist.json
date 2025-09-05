@@ -1,0 +1,272 @@
+{
+    "href": "https://api.spotify.com/v1/users/317ja5ek3gyzwusizu4xdtvlpwbi/playlists?offset=0&limit=50",
+    "limit": 50,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 7,
+    "items": [
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/4xazITZvWd75euzatpSYie"
+            },
+            "href": "https://api.spotify.com/v1/playlists/4xazITZvWd75euzatpSYie",
+            "id": "4xazITZvWd75euzatpSYie",
+            "images": [
+                {
+                    "height": null,
+                    "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8450f468f5a54b53dab5d96a0a",
+                    "width": null
+                }
+            ],
+            "name": "nozzle",
+            "owner": {
+                "display_name": "oneism",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/317ja5ek3gyzwusizu4xdtvlpwbi"
+                },
+                "href": "https://api.spotify.com/v1/users/317ja5ek3gyzwusizu4xdtvlpwbi",
+                "id": "317ja5ek3gyzwusizu4xdtvlpwbi",
+                "type": "user",
+                "uri": "spotify:user:317ja5ek3gyzwusizu4xdtvlpwbi"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "AAAAHK6bdD6hEh5FoPuyOSjwdFOkoDB7",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/4xazITZvWd75euzatpSYie/tracks",
+                "total": 24
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:4xazITZvWd75euzatpSYie"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/7aBPfoJQb8tOxTlyQVrGi2"
+            },
+            "href": "https://api.spotify.com/v1/playlists/7aBPfoJQb8tOxTlyQVrGi2",
+            "id": "7aBPfoJQb8tOxTlyQVrGi2",
+            "images": [
+                {
+                    "height": null,
+                    "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84eb1be13e7e7c8017ea2d559e",
+                    "width": null
+                }
+            ],
+            "name": "panjie",
+            "owner": {
+                "display_name": "oneism",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/317ja5ek3gyzwusizu4xdtvlpwbi"
+                },
+                "href": "https://api.spotify.com/v1/users/317ja5ek3gyzwusizu4xdtvlpwbi",
+                "id": "317ja5ek3gyzwusizu4xdtvlpwbi",
+                "type": "user",
+                "uri": "spotify:user:317ja5ek3gyzwusizu4xdtvlpwbi"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "AAAAE/JyBQAZ3aqCK7BiivRWVCJP8P81",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/7aBPfoJQb8tOxTlyQVrGi2/tracks",
+                "total": 17
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:7aBPfoJQb8tOxTlyQVrGi2"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/2GfgIcGBHqydZ3BN6bs4Fn"
+            },
+            "href": "https://api.spotify.com/v1/playlists/2GfgIcGBHqydZ3BN6bs4Fn",
+            "id": "2GfgIcGBHqydZ3BN6bs4Fn",
+            "images": [
+                {
+                    "height": null,
+                    "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84ab64edbd139af176d9f47c08",
+                    "width": null
+                }
+            ],
+            "name": "anti sad boi",
+            "owner": {
+                "display_name": "oneism",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/317ja5ek3gyzwusizu4xdtvlpwbi"
+                },
+                "href": "https://api.spotify.com/v1/users/317ja5ek3gyzwusizu4xdtvlpwbi",
+                "id": "317ja5ek3gyzwusizu4xdtvlpwbi",
+                "type": "user",
+                "uri": "spotify:user:317ja5ek3gyzwusizu4xdtvlpwbi"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "AAAAEJalzWv/lYkdIRZwEvQ6yby73WlZ",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/2GfgIcGBHqydZ3BN6bs4Fn/tracks",
+                "total": 13
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:2GfgIcGBHqydZ3BN6bs4Fn"
+        },
+        {
+            "collaborative": false,
+            "description": "404 not found for somtehing I want",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/02D2OPcPAHnEw7IbsoLT02"
+            },
+            "href": "https://api.spotify.com/v1/playlists/02D2OPcPAHnEw7IbsoLT02",
+            "id": "02D2OPcPAHnEw7IbsoLT02",
+            "images": [
+                {
+                    "height": null,
+                    "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84ff9e98b625342f38fa431772",
+                    "width": null
+                }
+            ],
+            "name": "404 not found",
+            "owner": {
+                "display_name": "riff",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1kpdwevzj37n5hdpeek1hj1yc"
+                },
+                "href": "https://api.spotify.com/v1/users/1kpdwevzj37n5hdpeek1hj1yc",
+                "id": "1kpdwevzj37n5hdpeek1hj1yc",
+                "type": "user",
+                "uri": "spotify:user:1kpdwevzj37n5hdpeek1hj1yc"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "AAAAGWpHzWuJDpc/IS2lX+rzktoGrnWW",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/02D2OPcPAHnEw7IbsoLT02/tracks",
+                "total": 17
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:02D2OPcPAHnEw7IbsoLT02"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/0EWoCeUOQAEEIVmIkfpMP2"
+            },
+            "href": "https://api.spotify.com/v1/playlists/0EWoCeUOQAEEIVmIkfpMP2",
+            "id": "0EWoCeUOQAEEIVmIkfpMP2",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d00001e0217f77fab7e8f18d5f9fee4a1ab67616d00001e022ac4a1fa3633712e4e5affe2ab67616d00001e024706c6d8142fc9d21cee7415ab67616d00001e028b83ab2ca2c034de5bcaa634",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d00001e0217f77fab7e8f18d5f9fee4a1ab67616d00001e022ac4a1fa3633712e4e5affe2ab67616d00001e024706c6d8142fc9d21cee7415ab67616d00001e028b83ab2ca2c034de5bcaa634",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d00001e0217f77fab7e8f18d5f9fee4a1ab67616d00001e022ac4a1fa3633712e4e5affe2ab67616d00001e024706c6d8142fc9d21cee7415ab67616d00001e028b83ab2ca2c034de5bcaa634",
+                    "width": 60
+                }
+            ],
+            "name": "galau tapi metal😞",
+            "owner": {
+                "display_name": "zidanramadhana",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/im4qj5byyx7w2b4an511ydn83"
+                },
+                "href": "https://api.spotify.com/v1/users/im4qj5byyx7w2b4an511ydn83",
+                "id": "im4qj5byyx7w2b4an511ydn83",
+                "type": "user",
+                "uri": "spotify:user:im4qj5byyx7w2b4an511ydn83"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "AAAAnAeciderD5kBhy5S25R1lisqj3ft",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/0EWoCeUOQAEEIVmIkfpMP2/tracks",
+                "total": 126
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:0EWoCeUOQAEEIVmIkfpMP2"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/1nXqI8GCQ57bBhmUOkM5cA"
+            },
+            "href": "https://api.spotify.com/v1/playlists/1nXqI8GCQ57bBhmUOkM5cA",
+            "id": "1nXqI8GCQ57bBhmUOkM5cA",
+            "images": [
+                {
+                    "height": null,
+                    "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84dc11b018f9d46e843d79140d",
+                    "width": null
+                }
+            ],
+            "name": "nightmuse",
+            "owner": {
+                "display_name": "oneism",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/317ja5ek3gyzwusizu4xdtvlpwbi"
+                },
+                "href": "https://api.spotify.com/v1/users/317ja5ek3gyzwusizu4xdtvlpwbi",
+                "id": "317ja5ek3gyzwusizu4xdtvlpwbi",
+                "type": "user",
+                "uri": "spotify:user:317ja5ek3gyzwusizu4xdtvlpwbi"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "AAAARyTp9R85TCogAUNaCa+gz7HeUA5l",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/1nXqI8GCQ57bBhmUOkM5cA/tracks",
+                "total": 41
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:1nXqI8GCQ57bBhmUOkM5cA"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/0pTs0KUfBXVANbFWEGGzcD"
+            },
+            "href": "https://api.spotify.com/v1/playlists/0pTs0KUfBXVANbFWEGGzcD",
+            "id": "0pTs0KUfBXVANbFWEGGzcD",
+            "images": [
+                {
+                    "height": null,
+                    "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84179d2034cf5670c73fbf4b4e",
+                    "width": null
+                }
+            ],
+            "name": "lpizx",
+            "owner": {
+                "display_name": "oneism",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/317ja5ek3gyzwusizu4xdtvlpwbi"
+                },
+                "href": "https://api.spotify.com/v1/users/317ja5ek3gyzwusizu4xdtvlpwbi",
+                "id": "317ja5ek3gyzwusizu4xdtvlpwbi",
+                "type": "user",
+                "uri": "spotify:user:317ja5ek3gyzwusizu4xdtvlpwbi"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "AAAAFSxmtsF841QHqUoUJNVgrC0ye4KC",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/0pTs0KUfBXVANbFWEGGzcD/tracks",
+                "total": 17
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:0pTs0KUfBXVANbFWEGGzcD"
+        }
+    ]
+}
