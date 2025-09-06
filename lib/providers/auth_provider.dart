@@ -22,7 +22,12 @@ class SpotifyAuthProvider extends ChangeNotifier {
   // Client ID dan redirect URI kamu
   final String clientId = dotenv.env['CLIENT_ID'] ?? '';
   final String redirectUri = dotenv.env['REDIRECT_URI'] ?? '';
-  final List<String> scopes = ['user-read-private', 'user-read-email'];
+  final List<String> scopes = [
+    'user-read-private',
+    'user-read-email',
+    'playlist-read-private', // Ditambahkan untuk akses playlist yang dimiliki dan diikuti
+    'user-library-read', 'playlist-modify-public', 'playlist-modify-private',
+  ];
 
   Future<void> loginWithSpotify(BuildContext context) async {
     _isLoading = true;
@@ -52,9 +57,9 @@ class SpotifyAuthProvider extends ChangeNotifier {
     } catch (e) {
       _errorMessage = 'Gagal login: ${e.toString()}';
       _loginStatus = 'Login Gagal';
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(_errorMessage)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(_errorMessage)));
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -66,9 +71,9 @@ class SpotifyAuthProvider extends ChangeNotifier {
       _errorMessage = 'Tidak ada access token untuk mengambil data pengguna';
       _loginStatus = 'Login Gagal';
       notifyListeners();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(_errorMessage)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(_errorMessage)));
       return;
     }
 
@@ -91,9 +96,9 @@ class SpotifyAuthProvider extends ChangeNotifier {
     } catch (e) {
       _errorMessage = 'Error: ${e.toString()}';
       _loginStatus = 'Login Gagal';
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(_errorMessage)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(_errorMessage)));
     } finally {
       notifyListeners();
     }

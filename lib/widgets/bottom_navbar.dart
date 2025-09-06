@@ -22,7 +22,7 @@ class BottomNavExample extends StatelessWidget {
     return Scaffold(
       body: _pages[navProvider.selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: AppColors.black,
+        backgroundColor: const Color.fromARGB(255, 19, 19, 19),
         selectedItemColor: AppColors.white,
         unselectedItemColor: AppColors.white70,
         currentIndex: navProvider.selectedIndex,
