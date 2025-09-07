@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sopotify/providers/playlist_provider.dart';
+import 'package:sopotify/widgets/liked_songs_card.dart';
 
 class PlaylistView extends StatelessWidget {
   final ScrollController scrollController;
@@ -26,14 +27,25 @@ class PlaylistView extends StatelessWidget {
           controller: scrollController,
           itemCount:
               playlistProvider.playlists.length +
-              (playlistProvider.hasMore ? 1 : 0),
+              (playlistProvider.hasMore ? 1 : 0) +
+              1, // +1 untuk header
           itemBuilder: (context, index) {
-            if (index == playlistProvider.playlists.length) {
+            if (index == 0) {
+              // Header di paling atas list
+              return LikedSongsCard();
+            }
+
+            // geser index agar sesuai dengan data playlist
+            final playlistIndex = index - 1;
+
+            // Loader ketika masih ada data yang akan diambil
+            if (playlistIndex == playlistProvider.playlists.length) {
               return const Center(child: CircularProgressIndicator());
             }
-            final playlist = playlistProvider.playlists[index];
+
+            final playlist = playlistProvider.playlists[playlistIndex];
             return Container(
-              margin: EdgeInsets.only(bottom: 6.5.h, top: 6.5.h),
+              margin: EdgeInsets.symmetric(vertical: 6.5.h),
               child: ListTile(
                 leading: playlist.imageUrl != null
                     ? Image.network(
@@ -45,7 +57,7 @@ class PlaylistView extends StatelessWidget {
                             const Icon(Icons.music_note),
                       )
                     : const Icon(Icons.music_note),
-                title: Text(playlist.name,),
+                title: Text(playlist.name),
                 subtitle: Text(
                   'By ${playlist.ownerName} • ${playlist.totalTracks} tracks',
                 ),

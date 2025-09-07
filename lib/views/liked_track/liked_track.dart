@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sopotify/controllers/liked_tracks_controller.dart';
-import 'package:sopotify/widgets/liked_track.dart';
+import 'package:sopotify/views/liked_track/liked_track_view.dart';
 
 class LikedTracksScreen extends StatefulWidget {
   const LikedTracksScreen({Key? key}) : super(key: key);

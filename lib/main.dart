@@ -22,7 +22,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => PlaylistProvider()),
         ChangeNotifierProvider(create: (_) => LikedTracksProvider()),
-        ChangeNotifierProvider(create: (_) => SearchProvider())
+        ChangeNotifierProvider(create: (_) => SearchProvider()),
       ],
       child: const MyApp(),
     ),
@@ -41,7 +41,18 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Spotify Flutter App',
-          theme: ThemeData.dark(),
+          theme: ThemeData.dark().copyWith(
+            scaffoldBackgroundColor: const Color.fromARGB(255, 15, 15, 15), // default background
+            textTheme: ThemeData.dark().textTheme.apply(
+              bodyColor: Colors.white, // semua teks jadi putih
+              displayColor: Colors.white,
+            ),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Color.fromARGB(255, 15, 15, 15), // AppBar hitam
+              foregroundColor: Colors.white, // Icon & title putih
+              elevation: 0, // tanpa shadow
+            ),
+          ),
           initialRoute: "/login",
           routes: {
             "/login": (context) => LoginScreen(),

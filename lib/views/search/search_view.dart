@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../providers/search_provider.dart';
 
@@ -64,7 +65,7 @@ class SearchView extends StatelessWidget {
                   ? Chip(
                       label: Text(
                         itemType.capitalize(),
-                        style: const TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 12.sp),
                       ),
                       backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                     )

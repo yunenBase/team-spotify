@@ -3,8 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sopotify/controllers/library_controller.dart';
 import 'package:sopotify/views/liked_track/liked_track.dart';
 import 'package:sopotify/widgets/button_menu.dart';
-import 'package:sopotify/widgets/liked_songs_card.dart';
-import 'package:sopotify/widgets/playlist_view.dart';
+import 'package:sopotify/views/library/playlist_view.dart';
 import 'package:sopotify/widgets/user_profile_view.dart';
 
 class LibraryScreen extends StatefulWidget {
@@ -77,7 +76,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 ],
               ),
             ),
-            LikedSongsCard(),
+            
             Expanded(
               child: PlaylistView(
                 scrollController: _controller.scrollController,
