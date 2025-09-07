@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sopotify/controllers/search_controller.dart';
 import '../../providers/search_provider.dart';
+import 'search_view.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -11,20 +13,19 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
+  late final SpotifySearchController _controller;
 
   @override
   void initState() {
     super.initState();
-    // Tunda clearSearch hingga setelah build selesai
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final searchProvider = context.read<SearchProvider>();
-      searchProvider.clearSearch();
-    });
+    _controller = SpotifySearchController();
+    _controller.init(context);
   }
 
   @override
   void dispose() {
     _searchController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -38,76 +39,67 @@ class _SearchScreenState extends State<SearchScreen> {
             icon: const Icon(Icons.clear),
             onPressed: () {
               _searchController.clear();
-              final searchProvider = context.read<SearchProvider>();
-              searchProvider.clearSearch();
+              _controller.refresh(context, '');
             },
           ),
         ],
       ),
-      body: Column(
-        children: [
-          // Search Bar
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: const InputDecoration(
-                hintText: 'Search for tracks...',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Search Bar
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                controller: _searchController,
+                decoration: const InputDecoration(
+                  hintText: 'Search for tracks, albums, artists, or playlists...',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: (query) {
+                  _controller.refresh(context, query);
+                },
               ),
-              onChanged: (query) {
-                final searchProvider = context.read<SearchProvider>();
-                searchProvider.searchTracks(context, query);
-              },
             ),
-          ),
-          // Hasil Search
-          Expanded(
-            child: Consumer<SearchProvider>(
-              builder: (context, searchProvider, child) {
-                if (searchProvider.isLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (searchProvider.errorMessage.isNotEmpty) {
-                  return Center(child: Text(searchProvider.errorMessage));
-                }
-                if (searchProvider.searchResults.isEmpty) {
-                  return const Center(
-                    child: Text('No results found. Try a different query.'),
+            // Filter Chips
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Consumer<SearchProvider>(
+                builder: (context, searchProvider, child) {
+                  return Wrap(
+                    spacing: 8.0,
+                    children: [
+                      _buildFilterChip(context, 'all', 'All'), // Tambah chip All
+                      _buildFilterChip(context, 'track', 'Tracks'),
+                      _buildFilterChip(context, 'album', 'Albums'),
+                      _buildFilterChip(context, 'artist', 'Artists'),
+                      _buildFilterChip(context, 'playlist', 'Playlists'),
+                    ],
                   );
-                }
-                return ListView.builder(
-                  itemCount: searchProvider.searchResults.length,
-                  itemBuilder: (context, index) {
-                    final track = searchProvider.searchResults[index];
-                    return ListTile(
-                      leading: track.album.images.isNotEmpty
-                          ? Image.network(
-                              track.album.images[0].url,
-                              width: 50,
-                              height: 50,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) => const Icon(Icons.music_note),
-                            )
-                          : const Icon(Icons.music_note),
-                      title: Text(track.name),
-                      subtitle: Text(
-                        '${track.artists.map((a) => a.name).join(', ')} • ${track.album.name}',
-                      ),
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Selected: ${track.name}')),
-                        );
-                      },
-                    );
-                  },
-                );
-              },
+                },
+              ),
             ),
-          ),
-        ],
+            // Hasil Search
+            Expanded(
+              child: SearchView(scrollController: _controller.scrollController),
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _buildFilterChip(BuildContext context, String type, String label) {
+    final searchProvider = context.watch<SearchProvider>();
+    return FilterChip(
+      label: Text(label),
+      selected: searchProvider.selectedType == type,
+      onSelected: (selected) {
+        if (selected) {
+          searchProvider.setSelectedType(type);
+        }
+      },
     );
   }
 }

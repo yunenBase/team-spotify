@@ -10,7 +10,7 @@ class LikedTrackItem {
   factory LikedTrackItem.fromJson(Map<String, dynamic> json) {
     return LikedTrackItem(
       addedAt: json['added_at'] ?? '',
-      track: Track.fromJson(json['track'] ?? {}),
+      track: Track.fromJson(json['track'] as Map<String, dynamic>? ?? {}),
     );
   }
 }
@@ -43,21 +43,21 @@ class Track {
   });
 
   factory Track.fromJson(Map<String, dynamic> json) {
-    var artistList = json['artists'] as List? ?? [];
-    List<Artist> artists = artistList.map((item) => Artist.fromJson(item)).toList();
+    var artistList = json['artists'] as List<dynamic>? ?? [];
+    List<Artist> artists = artistList.map((item) => Artist.fromJson(item as Map<String, dynamic>? ?? {})).toList();
 
     return Track(
-      album: Album.fromJson(json['album'] ?? {}),
+      album: Album.fromJson(json['album'] as Map<String, dynamic>? ?? {}),
       artists: artists,
-      discNumber: json['disc_number'] ?? 0,
-      durationMs: json['duration_ms'] ?? 0,
-      explicit: json['explicit'] ?? false,
-      id: json['id'] ?? '',
-      name: json['name'] ?? 'Unknown Track',
-      popularity: json['popularity'] ?? 0,
-      previewUrl: json['preview_url'] ?? '',
-      trackNumber: json['track_number'] ?? 0,
-      uri: json['uri'] ?? '',
+      discNumber: json['disc_number'] as int? ?? 0,
+      durationMs: json['duration_ms'] as int? ?? 0,
+      explicit: json['explicit'] as bool? ?? false,
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? 'Unknown Track',
+      popularity: json['popularity'] as int? ?? 0,
+      previewUrl: json['preview_url'] as String? ?? '',
+      trackNumber: json['track_number'] as int? ?? 0,
+      uri: json['uri'] as String? ?? '',
     );
   }
 }
@@ -86,22 +86,22 @@ class Album {
   });
 
   factory Album.fromJson(Map<String, dynamic> json) {
-    var artistList = json['artists'] as List? ?? [];
-    List<Artist> artists = artistList.map((item) => Artist.fromJson(item)).toList();
+    var artistList = json['artists'] as List<dynamic>? ?? [];
+    List<Artist> artists = artistList.map((item) => Artist.fromJson(item as Map<String, dynamic>? ?? {})).toList();
 
-    var imageList = json['images'] as List? ?? [];
-    List<Image> images = imageList.map((item) => Image.fromJson(item)).toList();
+    var imageList = json['images'] as List<dynamic>? ?? [];
+    List<Image> images = imageList.map((item) => Image.fromJson(item as Map<String, dynamic>? ?? {})).toList();
 
     return Album(
-      albumType: json['album_type'] ?? '',
+      albumType: json['album_type'] as String? ?? '',
       artists: artists,
-      availableMarkets: (json['available_markets'] as List?)?.cast<String>() ?? [],
-      id: json['id'] ?? '',
+      availableMarkets: (json['available_markets'] as List<dynamic>?)?.cast<String>() ?? [],
+      id: json['id'] as String? ?? '',
       images: images,
-      name: json['name'] ?? 'Unknown Album',
-      releaseDate: json['release_date'] ?? '',
-      totalTracks: json['total_tracks'] ?? 0,
-      uri: json['uri'] ?? '',
+      name: json['name'] as String? ?? 'Unknown Album',
+      releaseDate: json['release_date'] as String? ?? '',
+      totalTracks: json['total_tracks'] as int? ?? 0,
+      uri: json['uri'] as String? ?? '',
     );
   }
 }
@@ -110,18 +110,26 @@ class Artist {
   final String id;
   final String name;
   final String uri;
+  final List<String>? genres; // Tambahkan genres untuk subtitle di SearchView
+  final List<Image>? images; // Tambahkan images untuk SearchView
 
   Artist({
     required this.id,
     required this.name,
     required this.uri,
+    this.genres,
+    this.images,
   });
 
   factory Artist.fromJson(Map<String, dynamic> json) {
+    var genreList = json['genres'] as List<dynamic>? ?? [];
+    var imageList = json['images'] as List<dynamic>? ?? [];
     return Artist(
-      id: json['id'] ?? '',
-      name: json['name'] ?? 'Unknown Artist',
-      uri: json['uri'] ?? '',
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? 'Unknown Artist',
+      uri: json['uri'] as String? ?? '',
+      genres: genreList.cast<String>(),
+      images: imageList.map((item) => Image.fromJson(item as Map<String, dynamic>? ?? {})).toList(),
     );
   }
 }
@@ -139,9 +147,9 @@ class Image {
 
   factory Image.fromJson(Map<String, dynamic> json) {
     return Image(
-      height: json['height'] ?? 0,
-      width: json['width'] ?? 0,
-      url: json['url'] ?? '',
+      height: json['height'] as int? ?? 0,
+      width: json['width'] as int? ?? 0,
+      url: json['url'] as String? ?? '',
     );
   }
 }
@@ -164,16 +172,16 @@ class LikedTracksResponse {
   });
 
   factory LikedTracksResponse.fromJson(Map<String, dynamic> json) {
-    var itemList = json['items'] as List? ?? [];
-    List<LikedTrackItem> items = itemList.map((item) => LikedTrackItem.fromJson(item)).toList();
+    var itemList = json['items'] as List<dynamic>? ?? [];
+    List<LikedTrackItem> items = itemList.map((item) => LikedTrackItem.fromJson(item as Map<String, dynamic>? ?? {})).toList();
 
     return LikedTracksResponse(
       items: items,
-      limit: json['limit'] ?? 0,
-      next: json['next'],
-      offset: json['offset'] ?? 0,
-      previous: json['previous'],
-      total: json['total'] ?? 0,
+      limit: json['limit'] as int? ?? 0,
+      next: json['next'] as String?,
+      offset: json['offset'] as int? ?? 0,
+      previous: json['previous'] as String?,
+      total: json['total'] as int? ?? 0,
     );
   }
 }
