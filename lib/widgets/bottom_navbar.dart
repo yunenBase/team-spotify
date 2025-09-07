@@ -9,7 +9,13 @@ import 'package:sopotify/views/search/search_screen.dart';
 class BottomNavExample extends StatelessWidget {
   BottomNavExample({super.key});
 
-  final List<Widget> _pages = const [
+  final List<GlobalKey<NavigatorState>> _navigatorKeys = [
+    GlobalKey<NavigatorState>(), // Home
+    GlobalKey<NavigatorState>(), // Search
+    GlobalKey<NavigatorState>(), // Library
+  ];
+
+  final List<Widget> _rootPages = const [
     HomeScreen(),
     SearchScreen(),
     LibraryScreen(),
@@ -20,13 +26,34 @@ class BottomNavExample extends StatelessWidget {
     final navProvider = Provider.of<NavProvider>(context);
 
     return Scaffold(
-      body: _pages[navProvider.selectedIndex],
+      body: IndexedStack(
+        index: navProvider.selectedIndex,
+        children: List.generate(_rootPages.length, (index) {
+          return Navigator(
+            key: _navigatorKeys[index],
+            onGenerateRoute: (settings) {
+              return MaterialPageRoute(
+                builder: (_) => _rootPages[index],
+              );
+            },
+          );
+        }),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color.fromARGB(255, 19, 19, 19),
         selectedItemColor: AppColors.white,
         unselectedItemColor: AppColors.white70,
         currentIndex: navProvider.selectedIndex,
-        onTap: (index) => navProvider.changeIndex(index),
+        onTap: (index) {
+          if (index == navProvider.selectedIndex) {
+            // 👇 Reset ke halaman root tab yang sama
+            _navigatorKeys[index]
+                .currentState!
+                .popUntil((route) => route.isFirst);
+          } else {
+            navProvider.changeIndex(index);
+          }
+        },
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

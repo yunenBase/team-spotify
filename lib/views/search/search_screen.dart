@@ -1,71 +1,113 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../providers/search_provider.dart';
 
-class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({Key? key}) : super(key: key);
+
+  @override
+  _SearchScreenState createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Tunda clearSearch hingga setelah build selesai
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final searchProvider = context.read<SearchProvider>();
+      searchProvider.clearSearch();
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Dummy data
-    final playlists = [
-      {"name": "Chill Vibes", "imageUrl": ""},
-      {"name": "Workout Hits", "imageUrl": ""},
-      {"name": "Mood Booster", "imageUrl": ""},
-      {"name": "Late Night", "imageUrl": ""},
-      {"name": "Top Hits", "imageUrl": ""},
-      {"name": "Relaxing Tunes", "imageUrl": ""},
-    ];
-
     return Scaffold(
-      appBar: AppBar(title: const Text("Dummy Playlist Grid")),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-          itemCount: playlists.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // 2 kolom
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 12,
-            childAspectRatio: 2.5, // lebar lebih besar dari tinggi
+      appBar: AppBar(
+        title: const Text('Search'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.clear),
+            onPressed: () {
+              _searchController.clear();
+              final searchProvider = context.read<SearchProvider>();
+              searchProvider.clearSearch();
+            },
           ),
-          itemBuilder: (context, index) {
-            final playlist = playlists[index];
-
-            return Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.grey[900],
-                borderRadius: BorderRadius.circular(10),
+        ],
+      ),
+      body: Column(
+        children: [
+          // Search Bar
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              controller: _searchController,
+              decoration: const InputDecoration(
+                hintText: 'Search for tracks...',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
               ),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Container(
-                      width: 60,
-                      height: 60,
-                      color: Colors.grey[700], // dummy image
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Flexible(
-                    child: Text(
-                      playlist["name"]!,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+              onChanged: (query) {
+                final searchProvider = context.read<SearchProvider>();
+                searchProvider.searchTracks(context, query);
+              },
+            ),
+          ),
+          // Hasil Search
+          Expanded(
+            child: Consumer<SearchProvider>(
+              builder: (context, searchProvider, child) {
+                if (searchProvider.isLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (searchProvider.errorMessage.isNotEmpty) {
+                  return Center(child: Text(searchProvider.errorMessage));
+                }
+                if (searchProvider.searchResults.isEmpty) {
+                  return const Center(
+                    child: Text('No results found. Try a different query.'),
+                  );
+                }
+                return ListView.builder(
+                  itemCount: searchProvider.searchResults.length,
+                  itemBuilder: (context, index) {
+                    final track = searchProvider.searchResults[index];
+                    return ListTile(
+                      leading: track.album.images.isNotEmpty
+                          ? Image.network(
+                              track.album.images[0].url,
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) => const Icon(Icons.music_note),
+                            )
+                          : const Icon(Icons.music_note),
+                      title: Text(track.name),
+                      subtitle: Text(
+                        '${track.artists.map((a) => a.name).join(', ')} • ${track.album.name}',
                       ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
+                      onTap: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Selected: ${track.name}')),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
 }
-  

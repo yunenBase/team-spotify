@@ -40,6 +40,8 @@ class Playlist {
     );
   }
 
+  get images => null;
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
