@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sopotify/providers/user_provider.dart';
+import 'package:sopotify/views/profile/profile_screen.dart';
 import 'package:sopotify/views/search/search_screen.dart';
+import 'package:sopotify/widgets/user_profile_view.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -21,25 +23,7 @@ class SearchScreen extends StatelessWidget {
                 Row(
                   children: [
                     // Avatar dengan kondisi loading/error/null
-                    if (userProvider.isLoading)
-                      SizedBox(
-                        width: 35.w,
-                        height: 35.w,
-                        child: const CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    else if (userProvider.error.isNotEmpty)
-                      const CircleAvatar(
-                        child: Icon(Icons.error, color: Colors.red),
-                      )
-                    else if (userProvider.user?.imageUrl != null)
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          userProvider.user!.imageUrl!,
-                        ),
-                        radius: 17.w,
-                      )
-                    else
-                      const CircleAvatar(child: Icon(Icons.person)),
+                    ProfileAvatar(size: 17, onProfilePressed: ProfileScreen()),
 
                     SizedBox(width: 10.w),
 

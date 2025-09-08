@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sopotify/controllers/search_controller.dart';
 import 'package:sopotify/core/constant/app_colors.dart';
+import 'package:sopotify/core/utils/navigation_helper.dart';
+import 'package:sopotify/views/search/base_search_screen.dart';
 import '../../providers/search_provider.dart';
 import 'search_view.dart';
 
@@ -34,64 +36,66 @@ class _DeepSearchScreenState extends State<DeepSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Search Bar
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 15.h),
-              child: TextField(
-                controller: _searchController,
-                decoration: InputDecoration(
-                  hintText: 'Search for tracks, albums, artists, or playlists...',
-                  prefixIcon: const Icon(Icons.search),
-                  border: const OutlineInputBorder(),
-                  suffixIcon: _searchController.text.isNotEmpty
-                      ? IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: () {
-                            _searchController.clear();
-                            _controller.refresh(context, ""); // reset search
-                          },
-                        )
-                      : null,
+      body: Column(
+        children: [
+          Container(
+            color: Color(0xFF282828),
+            padding: EdgeInsets.only(left: 17.w, right: 17.w, top: 50.h, bottom: 8.h),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'What do you want to listen to?',
+                prefixIcon: GestureDetector(
+                  onTap: () => Navigator.pop(context, createSlideFadeRoute(SearchScreen())),
+                  child: Icon(Icons.arrow_back)),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
                 ),
-                onChanged: (query) {
-                  setState(() {}); // supaya suffixIcon ikut update
-                  _controller.refresh(context, query);
+                suffixIcon: _searchController.text.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: () {
+                          _searchController.clear();
+                          _controller.refresh(context, ""); // reset search
+                        },
+                      )
+                    : null,
+              ),
+              onChanged: (query) {
+                setState(() {}); // supaya suffixIcon ikut update
+                _controller.refresh(context, query);
+              },
+            ),
+          ),
+          // Filter Chips (Horizontal Scroll)
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 8.h),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Consumer<SearchProvider>(
+                builder: (context, searchProvider, child) {
+                  return Row(
+                    children: [
+                      _buildFilterChip(context, 'all', 'All'),
+                      SizedBox(width: 8.w),
+                      _buildFilterChip(context, 'track', 'Tracks'),
+                      SizedBox(width: 8.w),
+                      _buildFilterChip(context, 'album', 'Albums'),
+                      SizedBox(width: 8.w),
+                      _buildFilterChip(context, 'artist', 'Artists'),
+                      SizedBox(width: 8.w),
+                      _buildFilterChip(context, 'playlist', 'Playlists'),
+                    ],
+                  );
                 },
               ),
             ),
-            // Filter Chips (Horizontal Scroll)
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 8.h),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Consumer<SearchProvider>(
-                  builder: (context, searchProvider, child) {
-                    return Row(
-                      children: [
-                        _buildFilterChip(context, 'all', 'All'),
-                        SizedBox(width: 8.w),
-                        _buildFilterChip(context, 'track', 'Tracks'),
-                        SizedBox(width: 8.w),
-                        _buildFilterChip(context, 'album', 'Albums'),
-                        SizedBox(width: 8.w),
-                        _buildFilterChip(context, 'artist', 'Artists'),
-                        SizedBox(width: 8.w),
-                        _buildFilterChip(context, 'playlist', 'Playlists'),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ),
-            // Hasil Search
-            Expanded(
-              child: SearchView(scrollController: _controller.scrollController),
-            ),
-          ],
-        ),
+          ),
+          // Hasil Search
+          Expanded(
+            child: SearchView(scrollController: _controller.scrollController),
+          ),
+        ],
       ),
     );
   }

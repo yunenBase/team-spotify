@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:sopotify/core/constant/app_colors.dart';
 import '../../providers/search_provider.dart';
 
 class SearchView extends StatelessWidget {
@@ -67,7 +68,13 @@ class SearchView extends StatelessWidget {
                         itemType.capitalize(),
                         style: TextStyle(fontSize: 12.sp),
                       ),
-                      backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(17.r),
+                        side: BorderSide(
+                          color: AppColors.green,
+                          width: 1.w,
+                        ),
+                      ),
                     )
                   : null,
               onTap: () {

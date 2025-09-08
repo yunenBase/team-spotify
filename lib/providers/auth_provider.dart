@@ -25,8 +25,11 @@ class SpotifyAuthProvider extends ChangeNotifier {
   final List<String> scopes = [
     'user-read-private',
     'user-read-email',
-    'playlist-read-private', // Ditambahkan untuk akses playlist yang dimiliki dan diikuti
-    'user-library-read', 'playlist-modify-public', 'playlist-modify-private',
+    'playlist-read-private',
+    'user-follow-read',
+    'user-library-read',
+    'playlist-modify-public',
+    'playlist-modify-private',
   ];
 
   Future<void> loginWithSpotify(BuildContext context) async {

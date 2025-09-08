@@ -45,7 +45,7 @@ class PlaylistView extends StatelessWidget {
 
             final playlist = playlistProvider.playlists[playlistIndex];
             return Container(
-              margin: EdgeInsets.symmetric(vertical: 6.5.h),
+              margin: EdgeInsets.symmetric(vertical: 4.h),
               child: ListTile(
                 leading: playlist.imageUrl != null
                     ? Image.network(
@@ -59,7 +59,7 @@ class PlaylistView extends StatelessWidget {
                     : const Icon(Icons.music_note),
                 title: Text(playlist.name),
                 subtitle: Text(
-                  'By ${playlist.ownerName} • ${playlist.totalTracks} tracks',
+                  '${playlist.ownerName} • ${playlist.totalTracks} tracks',
                 ),
                 onTap: () {},
               ),

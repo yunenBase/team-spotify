@@ -4,7 +4,7 @@ import 'package:sopotify/core/constant/app_colors.dart';
 import 'package:sopotify/providers/bottom_navbar_provider.dart';
 import 'package:sopotify/views/home/home_screen.dart';
 import 'package:sopotify/views/library/library_screen.dart';
-import 'package:sopotify/views/search/base_search.dart';
+import 'package:sopotify/views/search/base_search_screen.dart';
 
 class BottomNavExample extends StatelessWidget {
   BottomNavExample({super.key});

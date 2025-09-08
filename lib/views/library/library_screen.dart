@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sopotify/controllers/library_controller.dart';
-import 'package:sopotify/views/liked_track/liked_track.dart';
 import 'package:sopotify/widgets/button_menu.dart';
 import 'package:sopotify/views/library/playlist_view.dart';
 import 'package:sopotify/widgets/user_profile_view.dart';
@@ -37,12 +36,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             UserProfileView(
-              onAddPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LikedTracksScreen()),
-                );
-              },
+              onAddPressed: () {},
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -56,13 +50,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 30.w),
+              padding: EdgeInsets.symmetric(horizontal: 15.w),
               margin: EdgeInsets.symmetric(vertical: 12.h),
               child: Row(
                 children: [
                   Icon(Icons.sync_alt, size: 16.sp),
                   Text(
-                    "Recently Played",
+                    "  Recently Played",
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,

@@ -29,15 +29,14 @@ class _LikedTracksScreenState extends State<LikedTracksScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () => _controller.refresh(context),
-          ),
-        ],
+        backgroundColor: const Color(0xFF00667B),
       ),
-      body: LikedTracksView(scrollController: _controller.scrollController),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          _controller.refresh(context);
+        },
+        child: LikedTracksView(scrollController: _controller.scrollController),
+      ),
     );
   }
 }

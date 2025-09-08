@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sopotify/providers/liked_track_provider.dart';
-import 'package:sopotify/views/liked_track/liked_track.dart';
+import 'package:sopotify/views/liked_track/liked_track_screen.dart';
 
 class LikedSongsCard extends StatelessWidget {
   const LikedSongsCard({super.key});
@@ -10,16 +10,26 @@ class LikedSongsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Image.asset(
-        "assets/images/icon_spotify.png",
+      leading: Container(
         width: 67.w,
-        height: 67.w,
-        fit: BoxFit.contain,
+        height: 67.h,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Colors.purple, Colors.blue],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Icon(
+          Icons.favorite,
+          color: Colors.white,
+          size: 30,
+        ),
       ),
       title: Text("Liked Songs"),
       subtitle: Consumer<LikedTracksProvider>(
         builder: (context, provider, child) {
-          return Text('${provider.totalTracks} liked songs');
+          return Text('${provider.totalTracks} songs');
         },
       ),
       onTap: () {
