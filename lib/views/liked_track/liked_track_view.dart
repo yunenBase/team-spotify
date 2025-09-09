@@ -110,17 +110,45 @@ class LikedTracksView extends StatelessWidget {
             final track = item.track;
             return ListTile(
               leading: track.album.images.isNotEmpty
-                  ? Image.network(
-                      track.album.images[0].url,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) =>
-                          const Icon(Icons.music_note),
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                        4.r,
+                      ), // bisa ganti sesuai kebutuhan
+                      child: Image.network(
+                        track.album.images[0].url,
+                        width: 50.w,
+                        height: 50.h,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          width: 50.w,
+                          height: 50.h,
+                          color: Theme.of(context).colorScheme.surfaceVariant,
+                          child: const Icon(Icons.music_note, size: 24),
+                        ),
+                      ),
                     )
-                  : const Icon(Icons.music_note),
-              title: Text(track.name),
+                  : Container(
+                      width: 50.w,
+                      height: 50.h,
+                      color: Theme.of(context).colorScheme.surfaceVariant,
+                      child: const Icon(Icons.music_note, size: 24),
+                    ),
+              title: Text(
+                track.name,
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
               subtitle: Text(
-                '${track.artists.map((a) => a.name)}',
-                // .join(', ')} • ${track.album.name} • Added: ${item.addedAt}
+                track.artists.isNotEmpty
+                    ? track.artists.map((a) => a.name).join(', ')
+                    : 'Unknown Artist',
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               trailing: IconButton(
                 onPressed: () {

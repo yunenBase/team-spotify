@@ -26,10 +26,13 @@ class LikedSongsCard extends StatelessWidget {
           size: 30,
         ),
       ),
-      title: Text("Liked Songs"),
+      title: Text("Liked Songs", style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold)),
       subtitle: Consumer<LikedTracksProvider>(
         builder: (context, provider, child) {
-          return Text('${provider.totalTracks} songs');
+          return Text('${provider.totalTracks} songs', style: TextStyle(
+                  fontSize: 14.sp,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),);
         },
       ),
       onTap: () {

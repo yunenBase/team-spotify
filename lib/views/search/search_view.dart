@@ -7,7 +7,8 @@ import '../../providers/search_provider.dart';
 class SearchView extends StatelessWidget {
   final ScrollController scrollController;
 
-  const SearchView({Key? key, required this.scrollController}) : super(key: key);
+  const SearchView({Key? key, required this.scrollController})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,11 @@ class SearchView extends StatelessWidget {
           return Center(child: Text(searchProvider.errorMessage));
         }
         if (searchProvider.query.isEmpty) {
-          return const Center(child: Text('Type to search for tracks, albums, artists, or playlists'));
+          return const Center(
+            child: Text(
+              'Type to search for tracks, albums, artists, or playlists',
+            ),
+          );
         }
 
         List<dynamic> items = [];
@@ -43,7 +48,11 @@ class SearchView extends StatelessWidget {
         }
 
         if (items.isEmpty) {
-          return Center(child: Text('No ${searchProvider.selectedType == 'all' ? 'results' : '${searchProvider.selectedType}s'} found for "${searchProvider.query}". Try a different query.'));
+          return Center(
+            child: Text(
+              'No ${searchProvider.selectedType == 'all' ? 'results' : '${searchProvider.selectedType}s'} found for "${searchProvider.query}". Try a different query.',
+            ),
+          );
         }
 
         return ListView.builder(
@@ -55,13 +64,26 @@ class SearchView extends StatelessWidget {
             }
 
             final item = items[index];
-            final itemType = searchProvider.selectedType == 'all' ? item['type'] as String : searchProvider.selectedType;
-            final itemData = searchProvider.selectedType == 'all' ? item['item'] : item;
+            final itemType = searchProvider.selectedType == 'all'
+                ? item['type'] as String
+                : searchProvider.selectedType;
+            final itemData = searchProvider.selectedType == 'all'
+                ? item['item']
+                : item;
 
             return ListTile(
               leading: _buildLeading(itemData, itemType),
-              title: Text(_getItemName(itemData, itemType)),
-              subtitle: Text(_getItemSubtitle(itemData, itemType)),
+              title: Text(
+                _getItemName(itemData, itemType),
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(
+                _getItemSubtitle(itemData, itemType),
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
               trailing: searchProvider.selectedType == 'all'
                   ? Chip(
                       label: Text(
@@ -70,16 +92,17 @@ class SearchView extends StatelessWidget {
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(17.r),
-                        side: BorderSide(
-                          color: AppColors.green,
-                          width: 1.w,
-                        ),
+                        side: BorderSide(color: AppColors.green, width: 1.w),
                       ),
                     )
                   : null,
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Selected: ${_getItemName(itemData, itemType)} (${itemType.capitalize()})')),
+                  SnackBar(
+                    content: Text(
+                      'Selected: ${_getItemName(itemData, itemType)} (${itemType.capitalize()})',
+                    ),
+                  ),
                 );
               },
             );
@@ -93,42 +116,58 @@ class SearchView extends StatelessWidget {
     switch (type) {
       case 'track':
         return item.album.images.isNotEmpty
-            ? Image.network(
-                item.album.images[0].url,
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => const Icon(Icons.music_note),
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(4.r),
+                child: Image.network(
+                  item.album.images[0].url,
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.music_note),
+                ),
               )
             : const Icon(Icons.music_note);
       case 'album':
         return item.images.isNotEmpty
-            ? Image.network(
-                item.images[0].url,
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => const Icon(Icons.album),
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(4.r),
+                child: Image.network(
+                  item.images[0].url,
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.album),
+                ),
               )
             : const Icon(Icons.album);
       case 'artist':
         return item.images != null && item.images.isNotEmpty
-            ? Image.network(
-                item.images[0].url,
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => const Icon(Icons.person),
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(4.r),
+                child: Image.network(
+                  item.images[0].url,
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.person),
+                ),
               )
             : const Icon(Icons.person);
       case 'playlist':
         return item.images.isNotEmpty
-            ? Image.network(
-                item.images[0].url,
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => const Icon(Icons.playlist_play),
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(4.r),
+                child: Image.network(
+                  item.images[0].url,
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.playlist_play),
+                ),
               )
             : const Icon(Icons.playlist_play);
       default:

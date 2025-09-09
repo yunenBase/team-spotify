@@ -111,4 +111,6 @@ class PlaylistProvider extends ChangeNotifier {
     _isLoading = false;
     notifyListeners();
   }
+
+  void fetchMore(BuildContext context) {}
 }

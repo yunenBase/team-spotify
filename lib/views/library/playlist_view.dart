@@ -57,9 +57,12 @@ class PlaylistView extends StatelessWidget {
                             const Icon(Icons.music_note),
                       )
                     : const Icon(Icons.music_note),
-                title: Text(playlist.name),
+                title: Text(playlist.name, style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold)),
                 subtitle: Text(
-                  '${playlist.ownerName} • ${playlist.totalTracks} tracks',
+                  '${playlist.ownerName} • ${playlist.totalTracks} tracks', style: TextStyle(
+                  fontSize: 14.sp,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
                 ),
                 onTap: () {},
               ),
