@@ -28,6 +28,10 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        defaultConfig {
+            manifestPlaceholders.put("redirectSchemeName", "myspotifyapp")
+            manifestPlaceholders.put("redirectHostName", "callback")
+        }
     }
 
     buildTypes {
